@@ -5,7 +5,7 @@
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
-        <h1>Login-Form</h1><hr>
+        <h1>Login-Form</h1><hr style="border: 1px solid green;">
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">login</button>
     </form>
