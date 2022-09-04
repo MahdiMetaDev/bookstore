@@ -3,8 +3,12 @@
 {% block title %}book detail{% endblock title %}
 
 {% block content %}
-    <h1>Book Detail</h1><hr style="border: 1px solid green;">
-    <h2>{{ book.title }}</h2>
-    <h4>{{ book.description }}</h4>
-    <p>{{ book.price }}</p>
+    <h1 class="text-center">{{ book.title }}</h1><hr style="border: 1px solid green;">
+    <div dir="rtl">
+        <h4>{{ book.description }}</h4>
+    </div>
+    <br>
+    <div dir="rtl">
+        <h4><span class="badge bg-secondary">قیمت: {{ book.price }}</span></h4>
+    </div>
 {% endblock content %}
