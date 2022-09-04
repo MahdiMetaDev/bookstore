@@ -151,3 +151,7 @@ LOGOUT_REDIRECT_URL = 'home'
 # Crispy Forms (new)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Email config (new)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
