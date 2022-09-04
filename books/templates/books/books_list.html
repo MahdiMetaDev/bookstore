@@ -3,7 +3,7 @@
 {% block title %}books list{% endblock title %}
 
 {% block content %}
-    <h1>List of Books</h1><hr style="border: 1px solid green;">
+    <h1>List of Books / <a href="{% url 'book_create' %}" class="btn btn-primary">New Book</a></h1><hr style="border: 1px solid green;">
     {% for book in books %}
         <ul>
             <li>
