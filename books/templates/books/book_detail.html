@@ -11,5 +11,6 @@
     <div dir="rtl">
         <h4><span class="badge bg-secondary">قیمت: {{ book.price }}</span></h4>
         <a href="{% url 'book_update' book.id %}"><button type="button" class="btn btn-primary">ویرایش</button></a>
+        <a href="{% url 'book_delete' book.id %}"><button type="button" class="btn btn-danger">حذف</button></a>
     </div>
 {% endblock content %}
