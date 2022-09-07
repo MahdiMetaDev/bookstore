@@ -3,11 +3,10 @@
 {% block title %}books list{% endblock title %}
 
 {% block content %}
-    <h1>List of Books / <a href="{% url 'book_create' %}" class="btn btn-primary">New Book</a></h1><hr style="border: 1px solid green;">
     {% for book in books %}
         <ul>
             <li>
-                <h2><a href="{{ book.get_absolute_url }}" class="btn btn-secondary">{{ book.title|capfirst }}</a></h2>
+                <h2><a href="{{ book.get_absolute_url }}" class="btn btn-danger mt-3">{{ book.title|capfirst }}</a></h2>
                 <h6>{{ book.description|truncatewords:10 }}</h6>
             </li>
         </ul>

@@ -1,17 +1,21 @@
-{% extends '_base.html' %}
+{% extends 'layout.html' %}
 
 {% block title %}HomePage{% endblock title %}
 
 {% block content %}
+
     {% if user.is_authenticated %}
-        <h1>This is HomePage, Welcome<span class="badge bg-secondary">{{ user.username }}</span></h1><hr style="border: 10px solid rgb(92, 92, 204);
-        border-radius: 5px;">
-        <h2><a href="{% url 'logout' %}"><span class="badge bg-danger">Logout!</span></a></h2>
-        <h2>Would you like to <a href="{% url 'password_change' %}"><span class="badge bg-primary">Change your password</span></a></h2>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h1>You have logged in. for more information check the dropdown menu.</h1>
+            </div>
+        </div>
     {% else %}
-        <h1>This is HomePage</h1><hr style="border: 10px solid rgb(237, 95, 95);
-        border-radius: 5px;">
-        <h2>Please, <a href="{% url 'login' %}"><span class="badge bg-success">login</span></a></h2>
-        <h2>Forgot your password? <a href="{% url 'password_reset' %}"><span class="badge bg-secondary">Reset</span></a></h2>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h1>Please login first.</h1>
+            </div>
+        </div>
     {% endif %}
+
 {% endblock content %}

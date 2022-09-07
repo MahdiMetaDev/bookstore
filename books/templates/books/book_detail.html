@@ -1,17 +1,14 @@
-{% extends '_base.html' %}
+{% extends 'simple.html' %}
 
 {% block title %}book detail{% endblock title %}
 
 {% block content %}
-    <h1 class="text-center">"{{ book.title|title|center:'28' }}"</h1><hr style="border: 1px solid green;">
-    <div dir="ltr">
+    <div class="mt-4 ">
         <h4>{{ book.description|linebreaks }}</h4>
     </div>
     <br>
     <div dir="ltr">
         <h4><span class="badge bg-secondary">price: {{ book.price }}</span></h4><hr style="border: 1px solid green;">
-        <a href="{% url 'book_update' book.id %}"><button type="button" class="btn btn-primary">Edit</button></a>
-        <a href="{% url 'book_delete' book.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
-        <a href="{% url 'books_list' %}"><button type="button" class="btn btn-warning">Back</button></a>
+        <a href="{% url 'books_list' %}"><button type="button" class="btn btn-danger">Back</button></a>
     </div>
 {% endblock content %}
