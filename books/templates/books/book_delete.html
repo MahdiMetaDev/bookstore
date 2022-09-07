@@ -3,12 +3,13 @@
 {% block title %}book delete{% endblock title %}
 
 {% block content %}
-    <h1>Do you want to delete?</h1>
+    <h1>Are you sure?</h1><hr>
+    <h2>Do you want to delete - {{ book.title|upper }} - ?</h2>
     <form action="" method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Yes</button>
+        <button type="submit" class="btn btn-danger mt-2">Yes</button>
         <a href="{% url 'books_list' %}">
-            <button type="button" class="btn btn-success">No</button>
+            <button type="button" class="btn btn-success mt-2">No</button>
         </a>
     </form>
 {% endblock content %}
