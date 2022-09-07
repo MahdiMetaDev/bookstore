@@ -3,7 +3,7 @@
 {% block title %}book detail{% endblock title %}
 
 {% block content %}
-    <h1 class="text-center">{{ book.title|title }}</h1><hr style="border: 1px solid green;">
+    <h1 class="text-center">"{{ book.title|title|center:'28' }}"</h1><hr style="border: 1px solid green;">
     <div dir="ltr">
         <h4>{{ book.description|linebreaks }}</h4>
     </div>
