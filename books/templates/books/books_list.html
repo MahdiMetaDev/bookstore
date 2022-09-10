@@ -3,14 +3,33 @@
 {% block title %}books list{% endblock title %}
 
 {% block content %}
-    {% for book in books %}
-        <ul>
-            <li>
-                <h2><a href="{{ book.get_absolute_url }}" class="btn btn-danger mt-3">{{ book.title|capfirst }}</a></h2>
-                <h6>{{ book.description|truncatewords:10 }}</h6>
-            </li>
-        </ul>
-    {% endfor %}
-    <hr>
-    <h5>You have {{ books_num }} book{{ books_num|pluralize }} at your database.</h5>
+
+    <div class="row flex-row-reverse justify-content-md-center">
+        {% for book in books %}
+            <div class="card m-4" style="max-width: 45%">
+                <div class="row g-0 h-100">
+                    <div class="col-md-4">
+                        <img src="https://elpythonista.com/wp-content/uploads/2020/10/Django-1024x576.jpg"
+                            class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8 h-100">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="card-body">
+                                <a href="{{ book.get_absolute_url }}" class="text-decoration-none"><h3 class="card-title"><strong>{{ book.title|capfirst }}</strong></h3></a>
+                                <p class="card-text pt-3">{{ book.description|truncatewords:'10' }}</p>
+                                <p class="text-muted">Author: {{ book.author }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <footer class="bg-light text-center text-lg-start mt-3">
+        <div class="text-center bg-grey">
+            <h5>You have {{ books_num }} book{{ books_num|pluralize }} at your database.</h5>
+        </div>
+    </footer>
+
 {% endblock content %}
