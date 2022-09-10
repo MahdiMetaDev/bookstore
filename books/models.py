@@ -1,12 +1,11 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    author = models.CharField(max_length=100, blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     cover = models.ImageField(upload_to='covers/', blank=True)
 

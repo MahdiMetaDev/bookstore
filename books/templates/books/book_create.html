@@ -5,7 +5,7 @@
 {% block title %}book create{% endblock title %}
 
 {% block content %}
-    <form action="" method="post" class="mt-4">
+    <form action="" method="post" class="mt-3" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="text-center">Add new book</h2>
         {{ form|crispy }}

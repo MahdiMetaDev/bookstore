@@ -5,7 +5,7 @@
 {% block title %}book update{% endblock title %}
 
 {% block content %}
-    <form action="" method="post" class="mt-4">
+    <form action="" method="post" class="mt-4" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="btn btn-success mt-3">Edit</button>

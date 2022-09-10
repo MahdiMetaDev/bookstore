@@ -6,11 +6,16 @@
 
     <div class="row flex-row-reverse justify-content-md-center">
         {% for book in books %}
-            <div class="card m-4" style="max-width: 45%">
+            <div class="card m-2" style="max-width: 45%">
                 <div class="row g-0 h-100">
                     <div class="col-md-4">
-                        <img src="https://elpythonista.com/wp-content/uploads/2020/10/Django-1024x576.jpg"
-                            class="img-fluid rounded-start" alt="...">
+                        {% if book.cover %}
+                            <img src="{{ book.cover.url }}"
+                                class="img-fluid rounded-start" alt="...">
+                        {% else %}
+                            <img src="https://wegoboard.com/img/p/fr-default-large_default.jpg"
+                                class="img-fluid rounded-start" alt="...">
+                        {% endif %}
                     </div>
                     <div class="col-md-8 h-100">
                         <div class="d-flex flex-column justify-content-between h-100">
