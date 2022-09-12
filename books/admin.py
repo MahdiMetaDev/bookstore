@@ -6,4 +6,7 @@ from .models import Book, Comment
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'book', 'text', 'datetime_created', )
 
-admin.site.register(Book)
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('title', 'author', 'price', )
+    prepopulated_fields = {'slug': ('title', )}    # (new)
