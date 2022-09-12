@@ -57,7 +57,7 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <h3>Write your idea:</h3>
-                                {{ comment_form|crispy }}
+                                {{ form|crispy }}
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mt-2">comment</button>
                         </form>
