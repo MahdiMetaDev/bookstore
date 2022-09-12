@@ -45,6 +45,31 @@
                         </li>
                     </ul>
                 </div>
+                {% if user.is_authenticated %}
+                    <div class="d-flex justify-content-between">
+                        <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        welcome <strong>{{ user.username }}</strong>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="d-flex justify-content-between">
+                        <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="#">
+                                        first <strong style="color: rgb(200, 116, 116);">login</strong> please!
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </nav>
 

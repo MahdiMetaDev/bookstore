@@ -58,34 +58,40 @@
                                     <h4 class="mb-0">Recent comments({{ book.comments.count }})</h4>
                                     <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
                                     {% for comment in book.comments.all %}
-                                        <hr>
-                                        <br>
-                                        <div class="d-flex flex-start">
-                                            <img class="rounded-circle shadow-1-strong me-3"
-                                                src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png" alt="avatar" width="60"
-                                                height="60" />
-                                            <div>
-                                                <h6 class="fw-bold mb-1">{{ comment.user.username }}</h6>
-                                                <div class="d-flex align-items-center mb-3">
+                                        {% if comment.is_active %}
+                                            <hr>
+                                            <br>
+                                            <div class="d-flex flex-start">
+                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                    src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png" alt="avatar" width="60"
+                                                    height="60" />
+                                                <div>
+                                                    <h6 class="fw-bold mb-1">{{ comment.user.username }}</h6>
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <p class="mb-0">
+                                                            {{ comment.datetime_created }}
+                                                            {% if comment.recommend %}
+                                                                <span class="badge bg-primary">recommended</span>
+                                                            {% else %}
+                                                                <span class="badge bg-danger">not recommended</span>
+                                                            {% endif %}
+                                                        </p>
+                                                        <a href="#!" class="link-muted"><i class="bi-pencil-square ms-2"></i></a>
+                                                        <a href="#!" class="link-muted"><i class="bi-heart-fill ms-2"></i></a>
+                                                    </div>
                                                     <p class="mb-0">
-                                                        {{ comment.datetime_created }}
-                                                        <span class="badge bg-primary">Pending</span>
+                                                        {{ comment.text|linebreaks }}
                                                     </p>
-                                                    <a href="#!" class="link-muted"><i class="bi-pencil-square ms-2"></i></a>
-                                                    <a href="#!" class="link-muted"><i class="bi-heart-fill ms-2"></i></a>
                                                 </div>
-                                                <p class="mb-0">
-                                                    {{ comment.text|linebreaks }}
-                                                </p>
+                                            </div>                                                                                                              
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#!" class="link-muted me-2 text-decoration-none"><i class="bi-hand-thumbs-up-fill me-1"></i>158</a>
+                                                    <a href="#!" class="link-muted text-decoration-none"><i class="bi-hand-thumbs-down-fill me-1"></i>13</a>
+                                                </div>
+                                                <a href="#!" class="link-muted text-decoration-none"><i class="bi-reply-fill me-1"></i> Reply</a>
                                             </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                              <a href="#!" class="link-muted me-2 text-decoration-none"><i class="bi-hand-thumbs-up-fill me-1"></i>158</a>
-                                              <a href="#!" class="link-muted text-decoration-none"><i class="bi-hand-thumbs-down-fill me-1"></i>13</a>
-                                            </div>
-                                            <a href="#!" class="link-muted text-decoration-none"><i class="bi-reply-fill me-1"></i> Reply</a>
-                                        </div>
+                                        {% endif %}
                                     {% endfor %}
                             </div>
                         </div>

@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Book, Comment
 from .forms import CommentForm
 
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
     template_name = 'books/books_list.html'
     context_object_name = 'books'
