@@ -53,11 +53,13 @@
 
                 <div class="d-flex justify-content-center">
                     <div class="card shadow my-3 p-5 w-sm-75 w-100">
-                        <form action="" method="post">
+                        <form action="{% url 'book_detail' slug=book.slug %}" method="post">
                             {% csrf_token %}
-                            <h3>Write your idea:</h3>
-                            {{ comment_form|crispy }}
-                            <button type="submit" class="btn btn-success mt-2">Add new Comment!</button>
+                            <div class="form-group">
+                                <h3>Write your idea:</h3>
+                                {{ comment_form|crispy }}
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-2">comment</button>
                         </form>
                     </div>
                 </div>
