@@ -66,7 +66,7 @@
                                                     src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png" alt="avatar" width="60"
                                                     height="60" />
                                                 <div>
-                                                    <h6 class="fw-bold mb-1">{{ comment.user.username }}</h6>
+                                                    <h4 class="fw-bold mb-1">{{ comment.user.username }}</h4>
                                                     <div class="d-flex align-items-center mb-3">
                                                         <p class="mb-0">
                                                             {{ comment.datetime_created }}
@@ -92,6 +92,8 @@
                                                 <a href="#!" class="link-muted text-decoration-none"><i class="bi-reply-fill me-1"></i> Reply</a>
                                             </div>
                                         {% endif %}
+                                    {% empty %}
+                                        <h4>No comments for this book yet ...</h4>
                                     {% endfor %}
                             </div>
                         </div>

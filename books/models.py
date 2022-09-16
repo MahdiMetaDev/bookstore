@@ -32,3 +32,19 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.user}: {self.text}'
+
+    class Meta:                                # (new)
+        ordering = ['-datetime_created']
+
+
+class ReplyToComment(models.Model):                                                             # (new)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    text = models.TextField()
+    datetime_created = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.text
+
+        
