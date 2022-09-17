@@ -4,13 +4,13 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Book, Comment
-from .forms import CommentForm
+from .forms import CommentForm, ReplyToCommentForm
 
 class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
     template_name = 'books/books_list.html'
     context_object_name = 'books'
-    paginate_by = 2
+    paginate_by = 4
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -18,53 +18,94 @@ class BookListView(LoginRequiredMixin, generic.ListView):
         return context
         
 
-class BookDetailView(generic.DetailView):
-    model = Book
-    template_name = 'books/book_detail.html'
-    slug_field = 'slug'
-    context_object_name = 'book'
-    form = CommentForm
+# class BookDetailView(generic.DetailView):
+#     model = Book
+#     template_name = 'books/book_detail.html'
+#     slug_field = 'slug'
+#     context_object_name = 'book'
+#     form = CommentForm
 
-    def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            book = self.get_object()
-            form.instance.user = request.user
-            form.instance.book = book
-            form.save()
+#     def post(self, request, *args, **kwargs):
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             book = self.get_object()
+#             form.instance.user = request.user
+#             form.instance.book = book
+#             form.save()
 
-            return redirect(reverse('book_detail', kwargs={
-                'slug': book.slug,
-            }))
+#             return redirect(reverse('book_detail', kwargs={
+#                 'slug': book.slug,
+#             }))
+        
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = self.form
+#         return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = self.form
-        return context
 
+def book_detail_view(request, slug):
+    book = get_object_or_404(Book, slug=slug)
+    # comment = get_object_or_404(Comment, pk=pk)
 
-# def book_detail_view(request, pk):
-#     book = get_object_or_404(Book, pk=pk)
-
-#     book_comments = book.comments.all()
+    book_comments = book.comments.all()
+    # comment_replies = comment.replies.all()
     
-#     if request.method == 'POST':
-#         comment_form = CommentForm(request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.book = book
-#             new_comment.user = request.user
-#             new_comment.save()
-#             comment_form = CommentForm()
-#     else:
-#         comment_form = CommentForm()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        # reply_form = ReplyToCommentForm(request.POST)
 
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.book = book
+            new_comment.user = request.user
+            new_comment.save()
+            comment_form = CommentForm()
+
+        # elif reply_form.is_valid():
+        #     new_reply = reply_form.save(commit=False)
+        #     new_reply.comment = comment
+        #     new_reply.user = request.user
+        #     new_reply.save()
+        #     reply_form = CommentForm()
+
+    else:
+        comment_form = CommentForm()
+        # reply_form = ReplyToCommentForm()
+
+    return render(request, 'books/book_detail.html', context={
+        'book': book,
+        'comments': book_comments,
+        'comment_form': comment_form,
+
+        # 'comment': comment,
+        # 'replies': comment_replies,
+        # 'reply_form': reply_form, 
+    })
+
+# def reply_to_comment(request, pk, slug):
+#     book = get_object_or_404(Book, slug=slug)
+
+#     comment = get_object_or_404(Comment, pk=pk)
+
+#     comment_replies = comment.replies.all()
+
+#     if request.method == 'POST':
+#         reply_form = ReplyToCommentForm(request.POST)
+#         if reply_form.is_valid():
+#             new_reply = reply_form.save(commit=False)
+#             new_reply.comment = comment
+#             new_reply.user = request.user
+#             new_reply.save()
+#             reply_form = CommentForm()
+#     else:
+#         reply_form = ReplyToCommentForm()
+    
 #     return render(request, 'books/book_detail.html', context={
 #         'book': book,
-#         'comments': book_comments,
-#         'comment_form': comment_form,
+#         'comment': comment,
+#         'reply_form': reply_form, 
+#         'replies': comment_replies,
 #     })
-
 
 class BookCreateView(generic.CreateView):
     model = Book

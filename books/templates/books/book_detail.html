@@ -62,9 +62,15 @@
                                             <hr>
                                             <br>
                                             <div class="d-flex flex-start">
-                                                <img class="rounded-circle shadow-1-strong me-3"
-                                                    src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png" alt="avatar" width="60"
-                                                    height="60" />
+                                                {% if user.profile.avatar %}
+                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                        src="{{ user.profile.avatar.url }}" alt="avatar" width="60"
+                                                        height="60" />
+                                                {% else %}
+                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                        src="https://wegoboard.com/img/p/fr-default-large_default.jpg" alt="avatar" width="60"
+                                                        height="60" />
+                                                {% endif %}
                                                 <div>
                                                     <h4 class="fw-bold mb-1">{{ comment.user.username }}</h4>
                                                     <div class="d-flex align-items-center mb-3">
@@ -82,6 +88,25 @@
                                                     <p class="mb-0">
                                                         {{ comment.text|linebreaks }}
                                                     </p>
+                                                    {% for reply in replies %}
+                                                        <p>
+                                                            {{ reply.user }}: {{ reply.text }}
+                                                        </p>
+                                                        <hr>
+                                                    {% endfor %}
+                                                    <!-- <div class="d-flex justify-content-center">
+                                                        <div class="card shadow my-3 p-5 w-sm-75 w-100">
+                                                            <form action="{% url 'book_detail' slug=book.slug %}" method="post">
+                                                                {% csrf_token %}
+                                                                <div class="form-group">
+                                                                    {{ reply_form }}
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary mt-2">
+                                                                    reply <i class="bi-arrow-right-circle"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div> -->
                                                 </div>
                                             </div>                                                                                                              
                                             <div class="d-flex justify-content-between align-items-center">
@@ -89,7 +114,7 @@
                                                     <a href="#!" class="link-muted me-2 text-decoration-none"><i class="bi-hand-thumbs-up-fill me-1"></i>158</a>
                                                     <a href="#!" class="link-muted text-decoration-none"><i class="bi-hand-thumbs-down-fill me-1"></i>13</a>
                                                 </div>
-                                                <a href="#!" class="link-muted text-decoration-none"><i class="bi-reply-fill me-1"></i> Reply</a>
+                                                <a href="#" class="link-muted text-decoration-none"><i class="bi-reply-fill me-1"></i> Reply</a>
                                             </div>
                                         {% endif %}
                                     {% empty %}
@@ -106,7 +131,7 @@
                         <form action="{% url 'book_detail' slug=book.slug %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                {{ form }}
+                                {{ comment_form }}
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">
                                 comment <i class="bi-arrow-right-circle"></i>

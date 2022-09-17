@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Book, Comment
+from .models import Book, Comment, ReplyToComment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -10,3 +10,6 @@ class CommentAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'price', )
     prepopulated_fields = {'slug': ('title', )}    # (new)
+
+
+admin.site.register(ReplyToComment)
