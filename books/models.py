@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
@@ -10,6 +11,10 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     cover = models.ImageField(upload_to='covers/', blank=True)
     slug = models.SlugField(null=False, unique=True) # (new)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Book, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Book'

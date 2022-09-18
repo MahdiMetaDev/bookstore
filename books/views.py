@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from .models import Book, Comment
 from .forms import CommentForm, ReplyToCommentForm
@@ -43,6 +44,7 @@ class BookListView(LoginRequiredMixin, generic.ListView):
 #         return context
 
 
+@login_required
 def book_detail_view(request, slug):
     book = get_object_or_404(Book, slug=slug)
     # comment = get_object_or_404(Comment, pk=pk)
