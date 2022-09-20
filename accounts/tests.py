@@ -2,8 +2,9 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
+
 class SignupPageTests(TestCase):
-    username = 'myusername'
+    username = 'my_username'
     email = 'myusername@gmail.com'
 
     def test_signup_page_url_by_name(self):
